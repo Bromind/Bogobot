@@ -8,8 +8,12 @@ function undefined(bot, message) {
     bot.reply(message, mardown);
 }
 
+function find_user(usr, cmd) {
+	return db.find({ "user": usr }, cmd);
+}
+
 function protected(bot, message, cmd) {
-    db.find({ "user": message.user }, function (err, docs) {
+    find_user(message.user, function (err, docs) {
         if (docs == null || docs.lengh > 1 || !docs[0].prof) {
             return undefined(bot, message);
         } else {
@@ -19,5 +23,6 @@ function protected(bot, message, cmd) {
 }
 
 module.exports = {
-	"protected":protected
+	"protected":protected,
+	"find_user":find_user
 }
