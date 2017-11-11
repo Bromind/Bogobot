@@ -21,15 +21,15 @@ function is_signedin(usr) {
 function protected(bot, message, cmd, cmd_) {
     return find_user(message.user, function (err, docs) {
         if (docs == null || docs.lengh > 1){
-            return undefined(bot, message);
+            undefined(bot, message);
         } else if (!docs[0].prof) {
             if (cmd_ == null) {
-                return undefined(bot, message);
+                undefined(bot, message);
             } else {
-                return cmd_(bot, message, docs[0])
+                cmd_(bot, message, docs[0])
             }
         } else {
-            return cmd(bot, message, docs[0]);
+            cmd(bot, message, docs[0]);
         }
     });
 }
