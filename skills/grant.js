@@ -14,7 +14,7 @@ module.exports = function (controller, bot) {
 
 function grant(bot, message, usr) {
     var access = (message.match[1] == "grant")
-    var other = db.update({ user:message.match[2] },
+    db.update({ user:message.match[2] },
         { $set: { prof:access } }, {}, function(err, numAffected) {
             if (err || numAffected != 1) {
                 bot.reply(message, "User not found");
