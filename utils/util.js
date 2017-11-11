@@ -12,6 +12,12 @@ function find_user(usr, cmd) {
 	return db.find({ user: usr }, cmd);
 }
 
+function is_signedin(usr) {
+	return find_user(usr, function(err, docs){
+		return docs.lengh == 0
+	});
+}
+
 function protected(bot, message, cmd) {
     find_user(message.user, function (err, docs) {
         if (docs == null || docs.lengh > 1 || !docs[0].prof) {
