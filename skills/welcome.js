@@ -2,16 +2,23 @@
 // Welcome message 
 // sent as the bot is added to a Cisco Spark space
 //
+
+var db = require('../utils/db.js');
+var util = require('../utils/util.js');
+
 module.exports = function (controller) {
 
     controller.on('bot_space_join', function (bot, event) {
+
+	    console.log(event);
+
 	    bot.startPrivateConversationWithPersonId(event.actorId, admission);
 
     });
 }
 
 function admission(err, convo) {
-	
+
 	console.log("Conversation admission");
 	convo.ask("Hello, do you have a problem ?",[
 		{
@@ -152,4 +159,24 @@ function admission(err, convo) {
 	convo.addMessage(
 		"Hello {{vars.first_name}} {{vars.last_name}}, you feel pain in your {{vars.pain_location}} which {{vars.pain_source}}, rated {{vars.pain_scale}} on a scale from 0 to 10",
 		"summarize");
+
+	convo.beforeThread(
+		"summarize", 
+		addDataInDB);
+
+}
+
+function addDataInDB(convo, next) {
+	var record = {
+		"first_name": convo.vars.first_name,
+		"last_name": convo.vars.last_name,
+		"pain_location": convo.vars.pain_location,
+		"pain_source": convo.vars.pain_source,
+		"hurt_cause": convo.vars.hurt_cause,
+		"pain_scale": convo.vars.pain_scale,
+		"mail": convo.context.user,
+		"prof": false,
+	};
+	db.insert(record);
+	next();
 }
