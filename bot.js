@@ -1,6 +1,6 @@
 //
 // Copyright (c) 2017 Cisco Systems
-// Licensed under the MIT License 
+// Licensed under the MIT License
 //
 
 //
@@ -41,6 +41,14 @@ if (!public_url) {
     process.exit(1);
 }
 
+
+//
+// Setup db
+//
+
+var Datastore = require('nedb')
+  , db = new Datastore({ filename: 'db/user.db', autoload: true });
+db.persistence.setAutocompactionInterval(5000)
 
 //
 // Create bot
