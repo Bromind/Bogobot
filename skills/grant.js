@@ -13,7 +13,6 @@ module.exports = function (controller, bot) {
 }
 
 function grant(bot, message, usr) {
-    var text = "Here are my skills:";
     var access = (message.match[1] == "grant")
     var other = db.update({ user:message.match[2] },
         { $set: { prof:access } }, {}, function(err, numAffected) {
