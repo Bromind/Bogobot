@@ -46,9 +46,7 @@ if (!public_url) {
 // Setup db
 //
 
-var Datastore = require('nedb')
-  , db = new Datastore({ filename: 'db/user.db', autoload: true });
-db.persistence.setAutocompactionInterval(5000)
+require('./utils/db.js')
 
 //
 // Create bot
@@ -110,7 +108,7 @@ controller.setupWebserver(port, function (err, webserver) {
 var normalizedPath = require("path").join(__dirname, "skills");
 require("fs").readdirSync(normalizedPath).forEach(function (file) {
     try {
-        require("./skills/" + file)(controller, bot, db);
+        require("./skills/" + file)(controller, bot);
         console.log("Cisco Spark: loaded skill: " + file);
     }
     catch (err) {
