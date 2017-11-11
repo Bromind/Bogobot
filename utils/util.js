@@ -9,7 +9,7 @@ function undefined(bot, message) {
 }
 
 function find_user(usr, cmd) {
-	return db.find({ "user": usr }, cmd);
+	return db.find({ user: usr }, cmd);
 }
 
 function protected(bot, message, cmd) {
