@@ -110,7 +110,7 @@ controller.setupWebserver(port, function (err, webserver) {
 var normalizedPath = require("path").join(__dirname, "skills");
 require("fs").readdirSync(normalizedPath).forEach(function (file) {
     try {
-        require("./skills/" + file)(controller, bot);
+        require("./skills/" + file)(controller, bot, db);
         console.log("Cisco Spark: loaded skill: " + file);
     }
     catch (err) {
