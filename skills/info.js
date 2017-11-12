@@ -28,13 +28,22 @@ function info(bot, message, usr) {
             }
             var text = "\n- " + "First name: " + first_name+" ";
             text += "\n- " + "Last name: " + last_name+" ";
-            text += "\n- " + "Pain: " + docs[0].pain_scale + "/10 ";
-            text += "\n- " + "Pain location: " + docs[0].pain_location+" ";
-		if (docs[0].pain_source == "pain came by itself") {
-			text += "\n- Pain came by itself";
-		} else {
-			text += "\n- Patient hurt himself <br> \t\""+docs[0].hurt_cause+"\"";
-		}
+
+            if (docs[0].pain_source != null) {
+                text += "\n- " + "Pain: " + docs[0].pain_scale + "/10 ";
+                text += "\n- " + "Pain location: " + docs[0].pain_location+" ";
+                if (docs[0].pain_source == "pain came by itself") {
+                   text += "\n- Pain came by itself";
+                } else {
+                    text += "\n- Patient hurt himself <br> \t\""+docs[0].hurt_cause+"\"";
+                }
+            }
+            if (docs[0].admission_date != null) {
+                text += "\n- Admission date: " + docs[0].admission_date
+            }
+            if (docs[0].discharge_date != null) {
+                text += "\n- Discharge date: " + docs[0].discharge_date
+            }
             bot.reply(message, text);
         }
     );

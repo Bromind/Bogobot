@@ -36,5 +36,4 @@ function installation(bot, message, usr) {
             })
         }
     })
-
 }
