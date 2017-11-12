@@ -44,6 +44,19 @@ module.exports = function (controller, bot) {
             "prof":false,
             "ref_prof":"aurelien.bloch@epfl.ch"
         }
+        tab[4] = {
+            "userId":"Y2lzY29zcGFyazovL3VzL1BFT1BMRS9iNWE0ZDI2OS1lMGZkLTQ4NzQtYWEyZS1lMWM5NzBmYjRhYzA",
+            "first_name":"Patient",
+            "last_name":"One",
+            "pain_location":"foot",
+            "pain_source":"pain came when you hurt yourself",
+            "hurt_cause":"fallen from a chair",
+            "pain_scale":"5",
+            "user":"bloch.aurelien@gmail.com",
+            "prof":false,
+            "has_issue":true,
+            "_id":"mVYKjbU1n9vPTQay"
+        }
         db.insert(tab);
     });
 }
