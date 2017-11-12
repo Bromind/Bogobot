@@ -19,7 +19,6 @@ module.exports = function (controller) {
 function admission(err, convo) {
 
 
-	console.log("Conversation admission");
 
 
 	var callback = function cb(err, docs) {
@@ -28,7 +27,6 @@ function admission(err, convo) {
 			    convo.ask;
 		    } else {
 			    // Already exists
-			    console.log(docs[0].has_issue);
 			    if (docs[0].has_issue == false) {
 				    convo.ask;
 			    } else {
@@ -62,7 +60,6 @@ function admission(err, convo) {
 	convo.addQuestion(
 		"What is your first name ?",
 		function (answer, convo) {
-			console.log("ask first name");
 			var name = convo.extractResponse('FirstName');
                         convo.setVar("first_name", name);
 			convo.next()
@@ -75,7 +72,6 @@ function admission(err, convo) {
 	convo.addQuestion(
 		"What is your last name ?",
 		function (answer, convo) {
-			console.log("ask last name");
 			var name = convo.extractResponse('LastName');
                         convo.setVar("last_name", name);
 			convo.next()
