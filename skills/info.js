@@ -44,6 +44,9 @@ function info(bot, message, usr) {
             if (docs[0].discharge_date != null) {
                 text += "\n- Discharge date: " + docs[0].discharge_date
             }
+            if (docs[0].pain_scales != null && docs[0].pain_scales.length != 0){
+                util.draw_gnuplot(docs[0].pain_scales, bot, message)
+            }
             bot.reply(message, text);
         }
     );
