@@ -6,7 +6,7 @@ var util = require('../utils/util.js')
 
 module.exports = function (controller, bot) {
 
-    controller.hears([/^help$/], 'direct_message,direct_mention', function (bot, message) {
+    controller.hears([/help/], 'direct_message,direct_mention', function (bot, message) {
         util.protected(bot, message, prof_help, patient_help)
     });
 }

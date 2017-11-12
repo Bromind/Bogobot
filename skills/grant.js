@@ -7,7 +7,7 @@ var db = require('../utils/db.js')
 
 module.exports = function (controller, bot) {
 
-    controller.hears([/^(grant|revoke) access to (.*)$/,/^(grant|revoke) access (.*)$/], 'direct_message,direct_mention', function (bot, message) {
+    controller.hears([/(grant|revoke) access to (.*)$/,/^(grant|revoke) access (.*)/], 'direct_message,direct_mention', function (bot, message) {
         util.protected(bot, message, grant)
     });
 }

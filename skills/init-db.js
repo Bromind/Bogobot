@@ -6,7 +6,7 @@ var db = require('../utils/db.js')
 
 module.exports = function (controller, bot) {
 
-    controller.hears([/^init-db$/], 'direct_message,direct_mention', function (bot, message) {
+    controller.hears([/init-db/], 'direct_message,direct_mention', function (bot, message) {
         var tab = [];
         tab[0] = {
             "userId":"Y2lzY29zcGFyazovL3VzL1BFT1BMRS80YWNjYWMzMy00NTU0LTRjYjEtOTM1Ny0yYzNhODY0MzczZTM",
