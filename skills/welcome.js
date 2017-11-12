@@ -28,6 +28,7 @@ function admission(err, convo) {
 			    convo.ask;
 		    } else {
 			    // Already exists
+			    console.log(docs[0].has_issue);
 			    if (docs[0].has_issue == false) {
 				    convo.ask;
 			    } else {
