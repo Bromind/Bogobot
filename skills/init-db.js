@@ -17,12 +17,8 @@ module.exports = function (controller, bot) {
             "prof":true,
             "patients":[
                 {
-                    "first_name":"Jean",
-                    "last_name":"Bon"
-                },
-                {
                     "first_name":"Scheldon",
-                    "last_name":"Cooper"
+                    "last_name":"Cooper",
                 }
             ]
         }
@@ -46,6 +42,7 @@ module.exports = function (controller, bot) {
             "last_name":"Cooper",
             "_id":"KF0dlXYP82MdHKM9",
             "prof":false
+            "ref_prof":"aurelien.bloch@epfl.ch"
         }
         db.insert(tab);
     });
