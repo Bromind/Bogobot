@@ -12,10 +12,37 @@ function find_user(usr, cmd) {
 	return db.find({ user: usr }, cmd);
 }
 
-function is_signedin(usr) {
-	return find_user(usr, function(err, docs){
-		return docs.lengh == 0
+function get_data_from_user(usr) {
+	return find_user(usr, function(err, docs) {
+		if (docs.lenghth == 0) {
+			return null;
+		} else {
+			return docs[0];
+		}
 	});
+}
+
+function find_user_from_userid(usrid, cmd) {
+	return db.find({ userId: usrid }, cmd);
+}
+
+function get_data_from_userid(usrid) {
+	return find_user_from_userid(usrid, function(err, docs) {
+		if (docs.length == 0) {
+			return null;
+		} else {
+			return docs[0];
+		}
+	});
+}
+
+function is_signedin_from_userid(usrid) {
+	var res = find_user_from_userid(usrid, function(err, docs){
+		console.log("DOCS : " + docs);
+		return docs.length != 0;
+	});
+	console.log(res);
+	return res;
 }
 
 function protected(bot, message, cmd) {
@@ -29,6 +56,10 @@ function protected(bot, message, cmd) {
 }
 
 module.exports = {
-	"protected":protected,
-	"find_user":find_user
+	protected:protected,
+	find_user:find_user,
+	get_data_from_user: get_data_from_user,
+	find_user_from_userid: find_user_from_userid,
+	is_signedin_from_userid: is_signedin_from_userid,
+	get_data_from_userid: get_data_from_userid,
 }

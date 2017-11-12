@@ -5,21 +5,40 @@
 
 var db = require('../utils/db.js');
 var util = require('../utils/util.js');
+var actorId = "";
 
 module.exports = function (controller) {
 
     controller.on('bot_space_join', function (bot, event) {
-
-	    console.log(event);
+	    actorId = event.actorId;
 
 	    bot.startPrivateConversationWithPersonId(event.actorId, admission);
-
     });
 }
 
 function admission(err, convo) {
 
+
 	console.log("Conversation admission");
+
+
+	var callback = function cb(err, docs) {
+		    if (docs.length == 0) {
+			    // Not found
+			    convo.ask;
+		    } else {
+			    // Already exists
+			    convo.setVar("first_name", docs[0].first_name);
+			    convo.setVar("last_name", docs[0].last_name);
+			    convo.setVar("pain_location", docs[0].pain_location);
+			    convo.setVar("pain_source", docs[0].pain_source);
+			    convo.setVar("pain_scale", docs[0].pain_scale);
+			    convo.gotoThread("summarize");
+		    }
+	}
+
+	util.find_user_from_userid(actorId, callback);
+
 	convo.ask("Hello, do you have a problem ?",[
 		{
 			pattern: "^yes$",
@@ -168,6 +187,7 @@ function admission(err, convo) {
 
 function addDataInDB(convo, next) {
 	var record = {
+		"userId": actorId,
 		"first_name": convo.vars.first_name,
 		"last_name": convo.vars.last_name,
 		"pain_location": convo.vars.pain_location,
