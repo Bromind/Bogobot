@@ -33,40 +33,31 @@ function pain_rec(bot, message, usr) {
                 var test = function(nb) {
                     nb = nb + 1;
                     bot.startPrivateConversationWithPersonId(patient_id, function(err, convo) {
-                    convo.ask("On a scale from 0 (no pain) to 10 (can't survive that much pain), how much du you rate your pain ?",function (response, convo) {
-                        var value = parseInt(response.text);
-                        console.log("*test2")
-                        db.update(patient,
-                        {$push : {pain_scales:value}}, {}, function(err, numAffected) {
-                            console.log("*test3")
-                            if (err || numAffected != 1) {
-                                console.log("*test4")
-                                bot.reply(message, "User not found");
-                            } else {
-                                convo.say("Pain recorded\n");
-                                convo.next();
-                                // if (id > rec) {
-                                //     return;
-                                // }
-                                // id = id + 1;
-                                // setInterval(test, sec * 1000);
-                            }
-                        })
-                    });
+                        convo.ask("On a scale from 0 (no pain) to 10 (can't survive that much pain), how much du you rate your pain ?",function (response, convo) {
+                            var value = parseInt(response.text);
+                            console.log("*test2")
+                            db.update(patient,
+                            {$push : {pain_scales:value}}, {}, function(err, numAffected) {
+                                console.log("*test3")
+                                if (err || numAffected != 1) {
+                                    console.log("*test4")
+                                    bot.reply(message, "User not found");
+                                } else {
+                                    convo.say("Pain recorded\n");
+                                    convo.next();
 
-                        // convo.say("Pain recorded\n");
-                        // convo.next();
-                        console.log("nb " + nb)
+                                }
+                            })
+                        });
+
                         if (nb >= rec) {
                             return;
                         } else {
                             setTimeout(test, sec * 1000, nb);
                         }
-                    });
-                    // convo.next()
+                    }) ;
                 }
                 test(nb);
-
         }
     });
 }
