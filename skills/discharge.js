@@ -27,7 +27,7 @@ function discharge(bot, message, usr) {
                 admission_date:true,
                 pain_location:true,
                 pain_source:true,
-                pain_sources:true,
+                pain_scales:true,
                 hurt_cause:true,
                 pain_scale:true,
             }
