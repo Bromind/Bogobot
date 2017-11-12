@@ -12,11 +12,22 @@ module.exports = function (controller, bot) {
 }
 
 function prof_help(bot, message, user) {
-    bot.reply(message, "Professional help");
+	text = "Help: \n";
+	text += "\n- discharge FIRST_NAME LAST_NAME: FIRST_NAME LAST_NAME is know healthy, he left the hospital.";
+	text += "\n- grant/revoke EMAIL_ADDRESS: become a doctor or become a patient.";
+	text += "\n- help: this is it.";
+	text += "\n- info FIRST_NAME LAST_NAME: get medical record of the given patient.";
+	text += "\n- install FIRST_NAME LAST_NAME in room ROOM_NUMBER: become the doctor of the given patient and assign him the given room.";
+	text += "\n- list: get all my patients.";
+
+    bot.reply(message, text);
 }
 
 function patient_help(bot, message, user) {
-    bot.reply(message, "Patient help");
+	var text = "Help: \n";
+	text += "\n- nurse: call for help.";
+	text += "\n- fill your personnal informations.";
+    bot.reply(message,text);
 }
 
 // var text = "Here are my skills:";

@@ -36,7 +36,7 @@ function discharge(bot, message, usr) {
                 bot.reply(message, "User not found");
             } else {
                 db.update(patient,
-                    {$set : {  has_issues:false, discharge_date:new Date()}},
+                    {$set : {  has_issue:false, discharge_date:new Date()}},
                     {},
                     function(err, numAffected) {
                         if (err || numAffected != 1) {

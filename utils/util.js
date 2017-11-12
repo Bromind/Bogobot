@@ -61,6 +61,23 @@ function protected(bot, message, cmd, cmd_) {
     });
 }
 
+function draw_gnuplot(pain_array, bot, message) {
+	var fs = require('fs');
+	fs.writeFile("./image/pain_data", pain_array+"\n", function(err) {
+		if(err) {
+			return console.log(err);
+		}
+
+		var exec = require('child_process').exec;
+		exec('cd image; ./process_image.sh; cd ..', function callback(error, stdout, stderr){
+			console.log(stdout);
+			console.log("send file");
+			bot.reply(message,{text: 'Pain evaluation graph', files:[fs.createReadStream('./image/pain_evolution.png')]});
+		});
+
+	});
+}
+
 module.exports = {
 	protected:protected,
 	find_user:find_user,
@@ -68,4 +85,5 @@ module.exports = {
 	find_user_from_userid: find_user_from_userid,
 	is_signedin_from_userid: is_signedin_from_userid,
 	get_data_from_userid: get_data_from_userid,
+	draw_gnuplot:draw_gnuplot
 }
