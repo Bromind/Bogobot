@@ -21,15 +21,17 @@ function discharge(bot, message, usr) {
     var patient = { first_name : first_name, last_name : last_name };
 
     db.update(patient,
-    { $unset: {
-            room:true,
-            ref_prof:true,
-            admission_date:true,
-            pain_location:true,
-            pain_source:true,
-            hurt_cause:true,
-            pain_scale:true,
-        } },
+        { $unset: {
+                room:true,
+                ref_prof:true,
+                admission_date:true,
+                pain_location:true,
+                pain_source:true,
+                pain_sources:true,
+                hurt_cause:true,
+                pain_scale:true,
+            }
+        },
         {},
         function(err, numAffected) {
             if (err || numAffected != 1) {
@@ -42,11 +44,23 @@ function discharge(bot, message, usr) {
                         if (err || numAffected != 1) {
                             bot.reply(message, "User not found");
                         } else {
-                            bot.reply(message, "Patient discharged");
+                            db.update(usr,
+                                { $pull: { patients:{ patient } } },
+                                {},
+                                function(err, numAffected) {
+                                    if (err || numAffected != 1) {
+                                        bot.reply(message, "User not found");
+                                    } else {
+                                        bot.reply(message, "Patient discharged");
+                                    }
+                                }
+                            )
                         }
-                });
+                    }
+                )
             }
-    })
 
-
+        }
+    );
 }
+
