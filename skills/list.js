@@ -8,9 +8,9 @@ var db = require('../utils/db.js')
 module.exports = function (controller, bot) {
 
     controller.hears([
-        /^list$/,
-        /^list patients$/,
-        /^list assigned patients$/,
+        /list/,
+        /list patients/,
+        /list assigned patients/,
         ], 'direct_message,direct_mention', function (bot, message) {
         util.protected(bot, message, list);
     });

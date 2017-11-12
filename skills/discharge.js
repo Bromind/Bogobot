@@ -8,8 +8,8 @@ var db = require('../utils/db.js')
 module.exports = function (controller, bot) {
 
     controller.hears([
-        /^discharge of (.*) (.*)$/,
-        /^discharge (.*) (.*)$/,
+        /discharge of (.*) (.*)/,
+        /discharge (.*) (.*)/,
         ], 'direct_message,direct_mention', function (bot, message) {
         util.protected(bot, message, discharge);
     });

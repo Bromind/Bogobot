@@ -8,8 +8,8 @@ var db = require('../utils/db.js')
 module.exports = function (controller, bot) {
 
     controller.hears([
-        /^installation of (.*) (.*) in room (.*)$/,
-        /^install (.*) (.*) in room (.*)$/,
+        /installation of (.*) (.*) in room (.*)/,
+        /install (.*) (.*) in room (.*)/,
         ], 'direct_message,direct_mention', function (bot, message) {
         util.protected(bot, message, installation);
     });
