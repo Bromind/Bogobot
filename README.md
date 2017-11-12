@@ -11,4 +11,4 @@ If he already came previously, his identity record are reused.
 
 ## Medical staff side
 
-The medical staff manages patients. When a patient (with his prefill admission-form) arrives, a doctor can install him, meaning that he takes him as a medical staff referent, and discharge the patient when he leaves the hospital. He can look at all his patient (asking for the list of its patient), and then get more infos about a particular one (like the identity information, symptoms, pain, plots, etc...).
+The medical staff manages patients. When a patient (with his prefill admission-form) arrives, a doctor can install him in a room, meaning that he takes him as a medical staff referent, and discharge the patient when he leaves the hospital. He can look at all his patient (asking for the list of its patient), and then get more infos about a particular one (like the identity information, symptoms, pain, plots, etc...).
