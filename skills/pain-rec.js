@@ -35,17 +35,20 @@ function pain_rec(bot, message, usr) {
                     bot.startPrivateConversationWithPersonId(patient_id, function(err, convo) {
                         convo.ask("On a scale from 0 (no pain) to 10 (can't survive that much pain), how much du you rate your pain ?",function (response, convo) {
                             var value = parseInt(response.text);
-                            console.log("*test2")
                             db.update(patient,
                             {$push : {pain_scales:value}}, {}, function(err, numAffected) {
-                                console.log("*test3")
                                 if (err || numAffected != 1) {
-                                    console.log("*test4")
                                     bot.reply(message, "User not found");
                                 } else {
-                                    convo.say("Pain recorded\n");
-                                    convo.next();
-
+                                    db.update(patient,
+                                    {$set : {pain_scale:value}}, {}, function(err, numAffected) {
+                                        if (err || numAffected != 1) {
+                                            bot.reply(message, "User not found");
+                                        } else {
+                                            convo.say("Pain recorded\n");
+                                            convo.next();
+                                        }
+                                    })
                                 }
                             })
                         });
@@ -56,6 +59,7 @@ function pain_rec(bot, message, usr) {
                             setTimeout(test, sec * 1000, nb);
                         }
                     }) ;
+
                 }
                 test(nb);
         }

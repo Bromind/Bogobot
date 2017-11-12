@@ -19,7 +19,7 @@ function prof_help(bot, message, user) {
 	text += "\n- " + bot.appendMention(message, "info FIRST_NAME LAST_NAME") + "<br>\tget medical record of the given patient.";
 	text += "\n- " + bot.appendMention(message, "install FIRST_NAME LAST_NAME in room ROOM_NUMBER") + "<br>\tbecome the doctor of the given patient and assign him the given room.";
 	text += "\n- " + bot.appendMention(message, "list") + "<br>\tget all my patients.";
-
+	text += "\n- " + bot.appendMention(message, "ask FIRST_NAME LAST_NAME for pain level X times every Y secondes") + "<br>\tget pain evolution of one of my patients.";
 	bot.reply(message, text);
 }
 
