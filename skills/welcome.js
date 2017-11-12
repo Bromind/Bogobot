@@ -194,7 +194,7 @@ function addDataInDB(convo, next) {
 		"pain_source": convo.vars.pain_source,
 		"hurt_cause": convo.vars.hurt_cause,
 		"pain_scale": convo.vars.pain_scale,
-		"mail": convo.context.user,
+		"user": convo.context.user,
 		"prof": false,
 	};
 	db.insert(record);
