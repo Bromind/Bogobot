@@ -57,6 +57,10 @@ function admission(err, convo) {
 		}
 	], {});
 
+	convo.addMessage(
+		"Visits are open from 9am to 18pm except for emergencies.",
+	"noProblem");
+
 	convo.addQuestion(
 		"What is your first name ?",
 		function (answer, convo) {
