@@ -22,7 +22,7 @@ function installation(bot, message, usr) {
     var patient = { first_name : first_name, last_name : last_name };
 
     db.update(patient,
-    { $set: { room:room, ref_prof:usr.user } }, {}, function(err, numAffected) {
+    { $set: { room:room, ref_prof:usr.user, admission_date:new Date() } }, {}, function(err, numAffected) {
         if (err || numAffected != 1) {
             bot.reply(message, "User not found");
         } else {

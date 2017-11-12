@@ -18,7 +18,7 @@ module.exports = function (controller, bot) {
             "patients":[
                 {
                     "first_name":"Scheldon",
-                    "last_name":"Cooper",
+                    "last_name":"Cooper"
                 }
             ]
         }
@@ -41,7 +41,7 @@ module.exports = function (controller, bot) {
             "first_name":"Scheldon",
             "last_name":"Cooper",
             "_id":"KF0dlXYP82MdHKM9",
-            "prof":false
+            "prof":false,
             "ref_prof":"aurelien.bloch@epfl.ch"
         }
         db.insert(tab);
