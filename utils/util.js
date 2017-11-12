@@ -9,7 +9,7 @@ function undefined(bot, message) {
 }
 
 function find_user(usr, cmd) {
-	return db.find({ user: usr }, cmd);
+    return db.find({ user: usr }, cmd);
 }
 
 function get_data_from_user(usr) {
@@ -45,10 +45,16 @@ function is_signedin_from_userid(usrid) {
 	return res;
 }
 
-function protected(bot, message, cmd) {
-    find_user(message.user, function (err, docs) {
-        if (docs == null || docs.lengh > 1 || !docs[0].prof) {
-            return undefined(bot, message);
+function protected(bot, message, cmd, cmd_) {
+    return find_user(message.user, function (err, docs) {
+        if (docs == null || docs.lengh > 1){
+            undefined(bot, message);
+        } else if (!docs[0].prof) {
+            if (cmd_ == null) {
+                undefined(bot, message);
+            } else {
+                cmd_(bot, message, docs[0])
+            }
         } else {
             cmd(bot, message, docs[0]);
         }
