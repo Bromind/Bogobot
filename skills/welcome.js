@@ -2,17 +2,43 @@
 // Welcome message 
 // sent as the bot is added to a Cisco Spark space
 //
+
+var db = require('../utils/db.js');
+var util = require('../utils/util.js');
+var actorId = "";
+
 module.exports = function (controller) {
 
     controller.on('bot_space_join', function (bot, event) {
-	    bot.startPrivateConversationWithPersonId(event.actorId, admission);
+	    actorId = event.actorId;
 
+	    bot.startPrivateConversationWithPersonId(event.actorId, admission);
     });
 }
 
 function admission(err, convo) {
-	
+
+
 	console.log("Conversation admission");
+
+
+	var callback = function cb(err, docs) {
+		    if (docs.length == 0) {
+			    // Not found
+			    convo.ask;
+		    } else {
+			    // Already exists
+			    convo.setVar("first_name", docs[0].first_name);
+			    convo.setVar("last_name", docs[0].last_name);
+			    convo.setVar("pain_location", docs[0].pain_location);
+			    convo.setVar("pain_source", docs[0].pain_source);
+			    convo.setVar("pain_scale", docs[0].pain_scale);
+			    convo.gotoThread("summarize");
+		    }
+	}
+
+	util.find_user_from_userid(actorId, callback);
+
 	convo.ask("Hello, do you have a problem ?",[
 		{
 			pattern: "^yes$",
@@ -152,4 +178,25 @@ function admission(err, convo) {
 	convo.addMessage(
 		"Hello {{vars.first_name}} {{vars.last_name}}, you feel pain in your {{vars.pain_location}} which {{vars.pain_source}}, rated {{vars.pain_scale}} on a scale from 0 to 10",
 		"summarize");
+
+	convo.beforeThread(
+		"summarize", 
+		addDataInDB);
+
+}
+
+function addDataInDB(convo, next) {
+	var record = {
+		"userId": actorId,
+		"first_name": convo.vars.first_name,
+		"last_name": convo.vars.last_name,
+		"pain_location": convo.vars.pain_location,
+		"pain_source": convo.vars.pain_source,
+		"hurt_cause": convo.vars.hurt_cause,
+		"pain_scale": convo.vars.pain_scale,
+		"mail": convo.context.user,
+		"prof": false,
+	};
+	db.insert(record);
+	next();
 }
