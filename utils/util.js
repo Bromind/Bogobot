@@ -61,7 +61,7 @@ function protected(bot, message, cmd, cmd_) {
     });
 }
 
-function draw_gnuplot(pain_array) {
+function draw_gnuplot(pain_array, bot, message) {
 	var fs = require('fs');
 	fs.writeFile("./image/pain_data", pain_array+"\n", function(err) {
 		if(err) {
@@ -71,9 +71,10 @@ function draw_gnuplot(pain_array) {
 		var exec = require('child_process').exec;
 		exec('cd image; ./process_image.sh; cd ..', function callback(error, stdout, stderr){
 			console.log(stdout);
+			console.log("send file");
+			bot.reply(message,{text: 'Pain evaluation graph', files:[fs.createReadStream('./image/pain_evolution.png')]});
 		});
 
-		console.log("The file was saved!");
 	});
 }
 
