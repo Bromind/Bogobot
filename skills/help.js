@@ -25,8 +25,8 @@ function prof_help(bot, message, user) {
 
 function patient_help(bot, message, user) {
 	var text = "Help: \n";
-	text += "\n- nurse: call for help.";
-	text += "\n- fill your personnal informations.";
+	text += "\n- " + bot.appendMention(nurse) + " call for help.";
+	text += "\n- " + bot.appendMention(complete profil) + " fill your personnal informations.";
     bot.reply(message,text);
 }
 
