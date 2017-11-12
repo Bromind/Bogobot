@@ -28,12 +28,16 @@ function admission(err, convo) {
 			    convo.ask;
 		    } else {
 			    // Already exists
-			    convo.setVar("first_name", docs[0].first_name);
-			    convo.setVar("last_name", docs[0].last_name);
-			    convo.setVar("pain_location", docs[0].pain_location);
-			    convo.setVar("pain_source", docs[0].pain_source);
-			    convo.setVar("pain_scale", docs[0].pain_scale);
-			    convo.gotoThread("summarize");
+			    if (docs[0].has_issue == false) {
+				    convo.ask;
+			    } else {
+				    convo.setVar("first_name", docs[0].first_name);
+				    convo.setVar("last_name", docs[0].last_name);
+				    convo.setVar("pain_location", docs[0].pain_location);
+				    convo.setVar("pain_source", docs[0].pain_source);
+				    convo.setVar("pain_scale", docs[0].pain_scale);
+				    convo.gotoThread("summarize");
+			    }
 		    }
 	}
 
@@ -48,9 +52,9 @@ function admission(err, convo) {
 		},
 		{
 			default: true,
-				callback: function (response, convo) {
-					convo.gotoThread("noProblem");
-				}
+			callback: function (response, convo) {
+				convo.gotoThread("noProblem");
+			}
 		}
 	], {});
 
@@ -135,6 +139,12 @@ function admission(err, convo) {
 					convo.setVar("pain_source", "pain came when you hurt yourself");
 					convo.gotoThread("howGotHurt");
 				},
+			},
+			{
+				default: true,
+				callback: function (response, convo) {
+					convo.gotoThread("painSource");
+				},
 			}
 		],
 		{},
@@ -196,6 +206,7 @@ function addDataInDB(convo, next) {
 		"pain_scale": convo.vars.pain_scale,
 		"user": convo.context.user,
 		"prof": false,
+		"has_issue": true,
 	};
 	db.insert(record);
 	next();
