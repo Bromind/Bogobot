@@ -23,9 +23,9 @@ module.exports = function (controller, bot) {
             ]
         }
         tab[1] = {
-            "user":"trou.duc@epfl.ch",
-            "first_name":"trou",
-            "last_name":"Duc",
+            "user":"Jean.Valjean@epfl.ch",
+            "first_name":"Jean",
+            "last_name":"Valjean",
             "_id":"KF0dlXYP82MdHKM7",
             "prof":false
         }

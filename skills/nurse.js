@@ -14,6 +14,7 @@ module.exports = function (controller) {
 				var patient_ref_prof = docs[0].ref_prof;
 				util.find_user(patient_ref_prof, function(err, docs_prof) {
 					var prof_id = docs_prof[0].userId;
+					console.log(prof_id);
 					bot.startPrivateConversationWithPersonId(prof_id, function(err, convo) {
 						convo.say("Patient "+patient_fn+" "+patient_ln+" needs help !");
 					});

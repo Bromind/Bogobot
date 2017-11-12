@@ -108,7 +108,7 @@ function admission(err, convo) {
 	);
 	
 	convo.addQuestion(
-		"You should come to the emergency service. I will prefill your admission fill in order to go faster when you come to our secretary.\n Where is the pain ?",
+		"You should come to the emergency service. I will prefill your admission form in order to go faster when you come to our secretary.\n Where is the pain ?",
 		function (response, convo) {
 			var name = convo.extractResponse('painLocation');
                         convo.setVar("pain_location", name);
@@ -161,7 +161,7 @@ function admission(err, convo) {
 	)
 
 	convo.addQuestion(
-		"On a scale from 0 (no pain) to 10 (can't survive that much pain), how much du you rate your pain ?",
+		"On a scale from 0 (no pain) to 10 (can't survive that much pain), how much do you rate your pain ?",
 		function(response, convo) {
 			var name = convo.extractResponse('painScale');
                         convo.setVar("pain_scale", name);
@@ -183,7 +183,7 @@ function admission(err, convo) {
 	);
 
 	convo.addMessage(
-		"Hello {{vars.first_name}} {{vars.last_name}}, you feel pain in your {{vars.pain_location}} which {{vars.pain_source}}, rated {{vars.pain_scale}} on a scale from 0 to 10",
+		"Hello {{vars.first_name}} {{vars.last_name}}, you feel pain in your {{vars.pain_location}} (the {{vars.pain_source}}) rated {{vars.pain_scale}} on a scale from 0 to 10",
 		"summarize");
 
 	convo.beforeThread(
